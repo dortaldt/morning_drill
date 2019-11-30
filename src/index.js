@@ -1,12 +1,50 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+function Toggle(props) {
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+  const [switchState, setSwitch] = useState("off");
+
+  return (
+    <div className="switch-wrapper">
+      <div className={"switch switch-" + switchState}>
+        <div className={"circle " + switchState}>
+          <button
+            className={switchState}
+            onClick={() => {
+              if (switchState === "on") setSwitch("off");
+              else setSwitch("on");
+            }}
+          >
+            {props.emoji}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function List(props) {
+  const items = ["💩", "👖", "👕"];
+  return (
+    <div class="list">
+      {items.map((item, i) => (
+        <Toggle emoji={item} />
+      ))}
+    </div>
+  );
+}
+
+function App(props) {
+
+  const [switchStatus, setSwitchStatus] = useState(Array(9))
+  console.log(switchStatus)
+
+  return (
+    <div className={"app"}>
+      <List />
+    </div>
+  );
+}
+
+ReactDOM.render(<App />, document.getElementById("root"));
