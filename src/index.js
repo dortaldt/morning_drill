@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 function Toggle(props) {
 
-  const [switchState, setSwitch] = useState("off");
+  const [switchState, setSwitchState] = useState(props.onOff)
 
   return (
     <div className="switch-wrapper">
@@ -12,8 +12,8 @@ function Toggle(props) {
           <button
             className={switchState}
             onClick={() => {
-              if (switchState === "on") setSwitch("off");
-              else setSwitch("on");
+              if (switchState === "on") setSwitchState("off");
+              else setSwitchState("on");
             }}
           >
             {props.emoji}
@@ -25,23 +25,24 @@ function Toggle(props) {
 }
 
 function List(props) {
+
   const items = ["💩", "👖", "👕"];
+
+  const [switchsState, setSwitchState] = useState(Array(items.length).fill('off'))
+  console.log(switchsState)
+
   return (
     <div class="list">
-      {items.map((item, i) => (
-        <Toggle emoji={item} />
+      {items.map((item,i) => (
+        <Toggle emoji={item} onOff ={switchsState[i]}/>
       ))}
     </div>
   );
 }
 
 function App(props) {
-
-  const [switchStatus, setSwitchStatus] = useState(Array(9))
-  console.log(switchStatus)
-
   return (
-    <div className={"app"}>
+    <div className="app">
       <List />
     </div>
   );
