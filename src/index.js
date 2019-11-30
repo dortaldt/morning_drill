@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 function Toggle(props) {
 
   const [switchState, setSwitchState] = useState(props.onOff)
-
+  
   return (
     <div className="switch-wrapper">
       <div className={"switch switch-" + switchState}>
@@ -12,8 +12,14 @@ function Toggle(props) {
           <button
             className={switchState}
             onClick={() => {
-              if (switchState === "on") setSwitchState("off");
-              else setSwitchState("on");
+              if (switchState === "on") {
+                setSwitchState("off");
+                props.modify(props.switchId, 'off')
+              }
+              else {
+                setSwitchState("on");
+                props.modify(props.switchId, 'on')
+              }
             }}
           >
             {props.emoji}
@@ -24,18 +30,43 @@ function Toggle(props) {
   );
 }
 
+function Sun(props){
+  return (
+    <div className='sun'>
+
+    </div>
+  )
+}
+
 function List(props) {
 
-  const items = ["💩", "👖", "👕"];
+  const items = ["💩", "👖", "👕", "😬","test"];
 
   const [switchsState, setSwitchState] = useState(Array(items.length).fill('off'))
-  console.log(switchsState)
 
+// Setting the background acourding to the switches
+  const ons = switchsState.map(x =>(x == 'on'))
+  const background = (ons.filter(Boolean).length/items.length*100).toFixed(1)
+  const bgStyle = {
+    'background-image' : 'linear-gradient(135deg, #5bb0ff 0%, #0070fb ' + background +'%)'  
+  }
+
+// pass the value from the switch to the list
+  const modify = (i,val) => {
+    const switchs = switchsState.slice();
+    switchs[i] = val;
+    setSwitchState(switchs)
+  }
+
+  console.log(switchsState)
   return (
-    <div class="list">
-      {items.map((item,i) => (
-        <Toggle emoji={item} onOff ={switchsState[i]}/>
-      ))}
+    <div className='list-container' style ={bgStyle}>
+      <div className="list" >
+        {items.map((item,i) => (
+          <Toggle emoji={item} onOff ={switchsState[i]} modify={modify} switchId = {i}/>
+        ))}
+        {/* <Sun /> */}
+      </div>
     </div>
   );
 }
