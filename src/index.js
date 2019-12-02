@@ -3,12 +3,13 @@ import ReactDOM from "react-dom";
 import { timeout } from "q";
 
 function Success(props) {
-  const start = props.start
+
   let spans = []
-  const numSpans = 30;
+  const numSpans = 10;
+  console.log(props.emoji)
 
   for (var i = 0; i < numSpans; i++) {
-    spans.push(<span className={'single-success ' + start}>{props.emoji}</span>);
+    spans.push(<span className={'single-success ' + 'anim-num-' + i + ' ' + props.runAmin}>{props.emoji}</span>);
   }
 
   return(
@@ -34,13 +35,13 @@ function Toggle(props) {
               onClick={() => {
                 if (switchState === "on") {
                   setSwitchState("off");
-                  props.modify(props.switchId, 'off')
+                  props.sendSwitchState(props.switchId, 'off')
                 }
                 else {
                   setSwitchState("on");
-                  props.modify(props.switchId, 'on')
+                  props.sendSwitchState(props.switchId, 'on')
+                  props.showAnim(props.switchId)
                 }
-                props.modifyAnimation('start')
               }}
             >
               {props.emoji}
@@ -65,6 +66,8 @@ function List(props) {
   const items = ["💩", "👖", "👕", "😬","test"];
 
   const [switchsState, setSwitchState] = useState(Array(items.length).fill('off'))
+  const [successOnOff, setSuccessOnOff] = useState(['off','❤️']);
+  const [runAmin, setRunAnim] = useState('') 
 
 // Setting the background acourding to the switches
   const ons = switchsState.map(x =>(x == 'on'))
@@ -73,35 +76,31 @@ function List(props) {
     'background-image' : 'linear-gradient(135deg, #5bb0ff 0%, #0070fb ' + background +'%)'  
   }
 
-  const [successOnOff, setSuccessOnOff] = useState(['off','🛳']);
-  const [start, setStart] = useState('')
-
 // pass the value from the switch to the list
-  const modify = (i,val) => {
+  const sendSwitchState = (i,val) => {
     const switchs = switchsState.slice();
     switchs[i] = val;
     setSwitchState(switchs)
-    // Set the success animation and then turn it off
-    setSuccessOnOff([val,items[i]])
-
-    setTimeout(function(){
-      setSuccessOnOff(['off',items[i]])
-      setStart('')
-    },3000);
+    // Turns on and off the success icons container
   }
 
-  const modifyAnimation = () => {
-    setTimeout(function(){
-      setStart('start')
-    }, 100)
+  const showAnim = (i) => {
+    setSuccessOnOff(['on',items[i]])
+    setTimeout(() => {
+      setRunAnim('run-anim')
+    },10)
+    setTimeout(() => {
+      setSuccessOnOff(['off',items[i]])
+      setRunAnim('')
+    }, 3000);
   }
 
   return (
     <div className='list-container' style ={bgStyle}>
       <div className="list" >
-        <Success class={'success-' + successOnOff[0]} emoji={successOnOff[1]}  start={start}/>
+        <Success class={'success-' + successOnOff[0]} emoji={successOnOff[1]} runAmin={runAmin}/>
         {items.map((item,i) => (
-          <Toggle emoji={item} onOff ={switchsState[i]} modify={modify} switchId = {i} modifyAnimation={modifyAnimation}/>
+          <Toggle emoji={item} onOff ={switchsState[i]} sendSwitchState={sendSwitchState} switchId = {i} showAnim = {showAnim}/>
         ))}
         <Sun />
       </div>
