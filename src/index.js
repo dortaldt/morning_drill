@@ -54,20 +54,43 @@ function Toggle(props) {
 }
 
 function Sun(props){
+  const size = props.status
   return (
-    <div className='sun'>
-      <div className='small'></div>
+    <div className={'sun ' + size} >
+      <div className='sun small'></div>
+    </div>
+  )
+}
+
+function Win(props) {
+
+  let showHide = ''
+  if(props.winHide == 'win'){showHide = 'show' } else {showHide = 'hide'}
+  console.log(props.winHide)
+
+  return(
+    <div className={'win win-' + showHide }>
+      <div className = 'win-content'>
+        <div className ='title'>
+          <h1>Good Morning!</h1>
+        </div>
+        <button onClick = {props.winOnClick}>Start</button>
+      </div>
     </div>
   )
 }
 
 function List(props) {
 
-  const items = ["💩", "👖", "👕", "😬","test"];
+  // const items = ["💩", "👖", "👕", "😬", "👟", "🧥"];
+  const items = ["💩", "👖", "👕"];
 
   const [switchsState, setSwitchState] = useState(Array(items.length).fill('off'))
   const [successOnOff, setSuccessOnOff] = useState(['off','❤️']);
   const [runAmin, setRunAnim] = useState('') 
+  const [screen, setScreen] = useState('game')
+  const [size, setSize] = useState('reg');
+  const [listHide, setListHide] = useState('show');
 
 // Setting the background acourding to the switches
   const ons = switchsState.map(x =>(x == 'on'))
@@ -76,12 +99,22 @@ function List(props) {
     'background-image' : 'linear-gradient(135deg, #5bb0ff 0%, #0070fb ' + background +'%)'  
   }
 
-// pass the value from the switch to the list
+// On switch change
   const sendSwitchState = (i,val) => {
+    // pass the value from the switch to the list
     const switchs = switchsState.slice();
     switchs[i] = val;
     setSwitchState(switchs)
-    // Turns on and off the success icons container
+    // Switch to "Win" mode when all switchs are On
+    if(ons.filter(Boolean).length == (items.length-1)) {
+      setTimeout(() => {
+        setScreen('win')
+        setSize('sun-win')
+      },1000)
+      setTimeout(() => {
+        setListHide('list-hide')
+      },1000)
+    };
   }
 
   const showAnim = (i) => {
@@ -95,18 +128,27 @@ function List(props) {
     }, 3000);
   }
 
+  const winOnClick = () => {
+    setScreen('game')
+    setListHide('show')
+    console.log( 'Click ' + screen)
+  }
+
   return (
     <div className='list-container' style ={bgStyle}>
-      <div className="list" >
+      <Win winOnClick={winOnClick} winHide={screen}/>
+      <div className={"list " + listHide }>
         <Success class={'success-' + successOnOff[0]} emoji={successOnOff[1]} runAmin={runAmin}/>
         {items.map((item,i) => (
           <Toggle emoji={item} onOff ={switchsState[i]} sendSwitchState={sendSwitchState} switchId = {i} showAnim = {showAnim}/>
         ))}
-        <Sun />
       </div>
+      <Sun status = {size}/>
     </div>
   );
 }
+
+
 
 function App(props) {
   return (
