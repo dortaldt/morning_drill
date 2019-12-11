@@ -135,9 +135,9 @@ function List(props) {
 
   return (
     <div className='list-container' style ={bgStyle}>
+      <Success class={'success-' + successOnOff[0]} emoji={successOnOff[1]} runAmin={runAmin}/>
       <Win winOnClick={winOnClick} winHide={screen}/>
       <div className={"list " + listHide }>
-        <Success class={'success-' + successOnOff[0]} emoji={successOnOff[1]} runAmin={runAmin}/>
         {items.map((item,i) => (
           <Toggle emoji={item} onOff={switchsState[i]} sendSwitchState={sendSwitchState} switchId={i} showAnim={showAnim}/>
         ))}

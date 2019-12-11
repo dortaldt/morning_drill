@@ -144,7 +144,7 @@ button {
 .success {
   width: 100vw;
   height: 100vh;
-  position: absolute;
+  position: fixed;
   z-index: 4;
   top: 0;
   flex-direction: column-reverse;
