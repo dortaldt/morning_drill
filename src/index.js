@@ -76,8 +76,8 @@ function Win(props) {
 }
 
 function List(props) {
-
-  const items = ["💩", "👖", "👕", "😬", "👟", "🧥"];
+  const items = ["💩", "👖", "👕"];
+  // const items = ["💩", "👖", "👕", "😬", "👟", "🧥"];
   const [switchsState, setSwitchState] = useState(Array(items.length).fill('off'))
   const [successOnOff, setSuccessOnOff] = useState(['off','❤️']);
   const [runAmin, setRunAnim] = useState('') 
@@ -101,7 +101,8 @@ function List(props) {
     console.log('switchsState is ' + switchsState)
 
     // Switch to "Win" mode when all switchs are On
-    if(ons.filter(Boolean).length == (items.length-1)) {
+    console.log('val is ' + val + 'and ons length is ' + ons.filter(Boolean).length + 'and items -1 length is ' + (items.length-1))
+    if(val == 'on' && ons.filter(Boolean).length == (items.length-1)) {
 
       setTimeout(() => {
         setScreen('win')
