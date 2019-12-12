@@ -71,13 +71,14 @@ function Win(props) {
         </div>
         <button onClick = {props.winOnClick}>Start</button>
       </div>
+      <Footer />
     </div>
   )
 }
 
 function List(props) {
-  const items = ["💩", "👖", "👕"];
-  // const items = ["💩", "👖", "👕", "😬", "👟", "🧥"];
+  
+  const items = ["💩", "👖", "👕", "😬", "👟", "🧥"];
   const [switchsState, setSwitchState] = useState(Array(items.length).fill('off'))
   const [successOnOff, setSuccessOnOff] = useState(['off','❤️']);
   const [runAmin, setRunAnim] = useState('') 
@@ -89,7 +90,7 @@ function List(props) {
   const ons = switchsState.map(x =>(x == 'on'))
   const background = (ons.filter(Boolean).length/items.length*100).toFixed(1)
   const bgStyle = {
-    'background-image' : 'linear-gradient(135deg, #5bb0ff 0%, #0070fb ' + background +'%)'  
+    'background-image' : 'linear-gradient(135deg, #00adff 0%, #009be4 ' + background +'%)'  
   }
 
 // On switch change
@@ -98,10 +99,8 @@ function List(props) {
     const switchs = switchsState.slice();
     switchs[i] = val;
     setSwitchState(switchs)
-    console.log('switchsState is ' + switchsState)
 
     // Switch to "Win" mode when all switchs are On
-    console.log('val is ' + val + 'and ons length is ' + ons.filter(Boolean).length + 'and items -1 length is ' + (items.length-1))
     if(val == 'on' && ons.filter(Boolean).length == (items.length-1)) {
 
       setTimeout(() => {
@@ -146,6 +145,14 @@ function List(props) {
       <Sun status = {size}/>
     </div>
   );
+}
+
+function Footer(props) {
+  return (
+    <div className = 'footer'>
+      <p>Created with ❤️ by <a href='http://www.dordesign.com' target='_blank'>Dor</a></p>
+    </div>
+  )
 }
 
 function App(props) {

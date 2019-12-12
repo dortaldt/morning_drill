@@ -2,6 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  font-family: 'Raleway', sans-serif;
 }
 
 .app {
@@ -18,7 +19,7 @@ body {
 }
 
 .list {
-    padding-top: 128px;
+    padding-top: 48px;
     display: flex;
     flex-direction: column;
     background-repeat: no-repeat;
@@ -42,9 +43,10 @@ body {
   height: 200px;
   width: 200px;
   z-index: 1;
-  top: 20px;
-  left: 20px;
+  top: -62px;
+  left: -74px;
   background-color: #ffec71;
+  /* background-image : linear-gradient(135deg, #ffec71 0%, #ffdd00 100%); */
   transition: transform 1s ease;
 }
 
@@ -59,11 +61,12 @@ body {
   height: 100px;
   width: 100px;
   border-radius: 100px;
-  background-color: #ffdf00;
+  background-color: #f9dd17;
   margin: auto;
   position: absolute;
   top: 50px;
   left: 50px;
+  z-index: 10;
 }
 
 .switch-wrapper {
@@ -78,7 +81,7 @@ body {
   border-width: 4px;
   position: relative;
   border-style: solid;
-  margin: 32px;
+  margin: 32px 48px;
 }
 
 .switch-off {
@@ -107,7 +110,7 @@ body {
 button {
   width: 100%;
   height: 100%;
-  font-size: 40px;
+  font-size: 48px;
   background-color: transparent;
   border: none;
   text-align: center;
@@ -230,13 +233,15 @@ button {
 }
 
 .main-icon {
-  font-size: 130px;
+  font-size: 100px;
+  margin: 0;
 }
 
 .win button {
   margin: auto;
   height: auto;
   width: auto;
+  font-size: 24px;
   padding: 16px 64px;
   background-color: #0070fa;
   box-shadow: 1px 3px 12px rgba(0, 0, 0, 0.23);
@@ -245,6 +250,13 @@ button {
 
 .win-hide {
   display: none;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
 }
 
 
