@@ -28,11 +28,13 @@ body {
     transition: transform 1s ease;
     transform: translateX(0);
     position: relative;
+    opacity: 1;
 }
 
 .list-hide {
-  transition: transform 1s ease;
+  transition: all 1s ease;
   transform: translateX(-100vh);
+  opacity: 0;
 }
 
 
