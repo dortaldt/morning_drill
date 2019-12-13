@@ -102,13 +102,12 @@ function List(props) {
     switchs[i] = val;
     setSwitchState(switchs)
     ReactGA.event({
-      category: 'Switch',
-      action: 'Click'
+      category: 'Switch ' + i,
+      action: 'Click ' + val
     });
 
     // Switch to "Win" mode when all switchs are On
     if(val == 'on' && ons.filter(Boolean).length == (items.length-1)) {
-
       setTimeout(() => {
         setScreen('win')
         setSize('sun-win')
@@ -117,6 +116,10 @@ function List(props) {
       setTimeout(() => {
         setListHide('list-hide')
       },1000)
+      ReactGA.event({
+        category: 'Status',
+        action: 'Win'
+      });
     };
   }
 
@@ -136,10 +139,6 @@ function List(props) {
     setListHide('show')
     setSize('sun')
     setSwitchState(Array(items.length).fill('off'))
-    ReactGA.event({
-      category: 'Status',
-      action: 'Win'
-    });
     console.log('switchsState is ' + switchsState)
   }
 
