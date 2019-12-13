@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-import { timeout } from "q";
+import ReactGA from 'react-ga';
+ReactGA.initialize('UA-38866967-4');
+// import { timeout } from "q";
 
 function Success(props) {
 
@@ -99,6 +101,10 @@ function List(props) {
     const switchs = switchsState.slice();
     switchs[i] = val;
     setSwitchState(switchs)
+    ReactGA.event({
+      category: 'Switch',
+      action: 'Click'
+    });
 
     // Switch to "Win" mode when all switchs are On
     if(val == 'on' && ons.filter(Boolean).length == (items.length-1)) {
@@ -130,6 +136,10 @@ function List(props) {
     setListHide('show')
     setSize('sun')
     setSwitchState(Array(items.length).fill('off'))
+    ReactGA.event({
+      category: 'Status',
+      action: 'Win'
+    });
     console.log('switchsState is ' + switchsState)
   }
 
