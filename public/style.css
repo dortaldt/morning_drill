@@ -11,9 +11,11 @@ body {
 }
 
 .list-container {
-  height: 100%;
-  width: 100%;
-  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  /* align-items: center; */
+  /* text-align: center; */
+  position: relative;
   overflow: scroll;
   z-index: 1;
 }
@@ -75,6 +77,7 @@ body {
   width: 100%;
   max-width: 500px;
   margin: auto;
+  display: flex;
 }
 
 .switch {
@@ -86,6 +89,7 @@ body {
   position: relative;
   border-style: solid;
   margin: 32px 48px;
+  width: 100%;
 }
 
 .switch-off {
@@ -95,6 +99,14 @@ body {
 .switch-on {
   background-color: rgb(255, 230, 0);
   border-color: #c7b300;
+}
+
+.switch-edit {
+  background: none;
+  border: none;
+  box-shadow: none;
+  width: 100px;
+  
 }
 
 .circle {
@@ -241,7 +253,7 @@ button {
   margin: 0;
 }
 
-.win button {
+.main-btn {
   margin: auto;
   height: auto;
   width: auto;
@@ -263,4 +275,68 @@ button {
   text-align: center;
 }
 
+.remove-item {
+  margin-right: 48px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px; 
+  color: #fb4d4d;
+}
+
+.edit-btn-wrapper {
+  position: fixed;
+  display: flex;
+  flex-direction: row-reverse;
+  top: 0px;
+  right: 0px;
+  z-index: 100;
+}
+
+.edit-btn {
+  position: relative;
+  width: auto;
+  z-index: 100;
+  background-color: transparent;
+  box-shadow: none;
+  padding: 16px 32px;
+  color: #0070fa;
+  margin: 24px;
+  font-size: 16px;
+  background-color: #ffec71;
+}
+
+.sconed-btn {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  background-color: transparent;
+  border: 1px dashed white;
+  color: white;
+  height: 100px;
+  width: 100px;
+}
+
+.add-toggle {
+  display: flex;
+  padding-left: 24px;
+}
+
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
 
