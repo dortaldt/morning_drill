@@ -23,7 +23,6 @@ function Success(props) {
 }
 
 function Toggle(props) {
-
   return (
     <div>
       <div className="switch-wrapper">
@@ -39,15 +38,31 @@ function Toggle(props) {
                   props.sendSwitchState(props.switchId, 'on')
                   props.showAnim(props.switchId)
                 }
+                {console.log('inside the list items: ' + props.items)}
               }}
             >
               {props.emoji}
             </button>
           </div>
         </div>
+        {props.edit ? <div className ='remove-item'>
+          <button onClick = {() => {
+            props.deleteItem(props.switchId)
+            }} >
+          <i class="material-icons md-36">clear</i>
+          </button>
+        </div> : null}
       </div>
     </div>
   );
+}
+
+function AddToggle(props){
+  return (
+    <div className = 'add-toggle'>
+      ADD
+    </div>
+  )
 }
 
 function Sun(props){
@@ -80,22 +95,31 @@ function Win(props) {
 
 function List(props) {
   
-  const items = ["💩", "👖", "👕", "😬", "👟", "🧥"];
+  const [items, setItems] = useState(["💩", "👖", "👕", "😬", "👟", "🧥"]);
   const [switchsState, setSwitchState] = useState(Array(items.length).fill('off'))
   const [successOnOff, setSuccessOnOff] = useState(['off','❤️']);
   const [runAmin, setRunAnim] = useState('') 
   const [screen, setScreen] = useState('win')
   const [size, setSize] = useState('sun-win');
   const [listHide, setListHide] = useState('list-hide');
+  const [edit, setEdit] = useState(false);
 
-// Setting the background acourding to the switches
+  // Setting the background acourding to the switches
   const ons = switchsState.map(x =>(x == 'on'))
   const background = (ons.filter(Boolean).length/items.length*100).toFixed(1)
   const bgStyle = {
     'background-image' : 'linear-gradient(135deg, #00adff 0%, #009be4 ' + background +'%)'  
   }
 
-// On switch change
+  // On edit mode - deleting and item
+  const deleteItem = (id) => {
+    const newItems = items.slice()
+    newItems.splice(id, 1)
+    setItems(newItems)
+    console.log(newItems)
+  }
+
+  // On switch change
   const sendSwitchState = (i,val) => {
     // pass the value from the switch to the list
     const switchs = switchsState.slice();
@@ -142,13 +166,27 @@ function List(props) {
     console.log('switchsState is ' + switchsState)
   }
 
+  const toggleEdit = () => {
+    if(edit){
+      setEdit(false)
+    } else {
+      setEdit(true)
+    }
+  }
+
   return (
     <div className='list-container' style ={bgStyle}>
+      <button className='edit-btn' onClick = {()=>(
+          toggleEdit()
+        )} >EDIT</button>
       <Success class={'success-' + successOnOff[0]} emoji={successOnOff[1]} runAmin={runAmin}/>
       <Win winOnClick={winOnClick} winHide={screen}/>
       <div className={"list " + listHide }>
         {items.map((item,i) => (
-          <Toggle emoji={item} onOff={switchsState[i]} sendSwitchState={sendSwitchState} switchId={i} showAnim={showAnim}/>
+          [
+          <Toggle emoji={item} onOff={switchsState[i]} sendSwitchState={sendSwitchState} switchId={i} showAnim={showAnim} edit={edit} deleteItem = {deleteItem} items = {items}/>,,
+          edit ? <AddToggle /> : <div></div>
+          ]
         ))}
       </div>
       <Sun status = {size}/>

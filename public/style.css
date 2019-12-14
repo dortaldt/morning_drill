@@ -75,6 +75,7 @@ body {
   width: 100%;
   max-width: 500px;
   margin: auto;
+  display: flex;
 }
 
 .switch {
@@ -86,6 +87,7 @@ body {
   position: relative;
   border-style: solid;
   margin: 32px 48px;
+  width: 100%;
 }
 
 .switch-off {
@@ -263,4 +265,18 @@ button {
   text-align: center;
 }
 
+.remove-item {
+  width: 24px;
+  margin-right: 48px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px; 
+  color: white;
+}
+
+.edit-btn {
+  position: relative;
+  height: auto;
+}
 
