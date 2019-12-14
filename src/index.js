@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import ReactGA from 'react-ga';
+import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransition } from 'react-transition-group';
 ReactGA.initialize('UA-38866967-4');
 // import { timeout } from "q";
 
@@ -60,7 +62,9 @@ function Toggle(props) {
 function AddToggle(props){
   return (
     <div className = 'add-toggle'>
-      ADD
+      <button onClick = {()=>(
+        props.addItem(props.switchId, '🦊')
+      )}>add a task</button>
     </div>
   )
 }
@@ -81,14 +85,14 @@ function Win(props) {
 
   return(
     <div className={'win win-' + showHide }>
-      <div className = 'win-content'>
-        <div className ='title'>
-          <h1 className='main-icon'>🐓</h1>
-          <h1>Good Morning!</h1>
+        <div className = 'win-content'>
+          <div className ='title'>
+            <h1 className='main-icon'>🐓</h1>
+            <h1>Good Morning!</h1>
+          </div>
+          <button className ='main-btn' onClick = {props.winOnClick}>Start</button>
         </div>
-        <button onClick = {props.winOnClick}>Start</button>
-      </div>
-      <Footer />
+        <Footer />
     </div>
   )
 }
@@ -109,14 +113,6 @@ function List(props) {
   const background = (ons.filter(Boolean).length/items.length*100).toFixed(1)
   const bgStyle = {
     'background-image' : 'linear-gradient(135deg, #00adff 0%, #009be4 ' + background +'%)'  
-  }
-
-  // On edit mode - deleting and item
-  const deleteItem = (id) => {
-    const newItems = items.slice()
-    newItems.splice(id, 1)
-    setItems(newItems)
-    console.log(newItems)
   }
 
   // On switch change
@@ -169,23 +165,47 @@ function List(props) {
   const toggleEdit = () => {
     if(edit){
       setEdit(false)
+      setScreen('win')
+      // setScreen('win')
+      setSize('sun-win')
+      setListHide('list-hide')
     } else {
       setEdit(true)
+      setScreen('edit')
+      setListHide('show')
+      setSize('sun')
     }
+  }
+
+  // On edit mode - adding and item
+  const addItem = (id, val) => {
+    var emoji = prompt("Which Emoji would like to add?")
+    if(emoji === null) return
+    const newItems = items.slice()
+    newItems.splice(id +1 , 0, emoji)
+    setItems(newItems)
+  }
+
+  // On edit mode - deleting and item
+  const deleteItem = (id) => {
+    const newItems = items.slice()
+    newItems.splice(id, 1)
+    setItems(newItems)
+    console.log(newItems)
   }
 
   return (
     <div className='list-container' style ={bgStyle}>
-      <button className='edit-btn' onClick = {()=>(
+      {screen==='win' || screen==='edit'? <button className='edit-btn main-btn' onClick = {()=>(
           toggleEdit()
-        )} >EDIT</button>
+        )} >EDIT</button> : null}
       <Success class={'success-' + successOnOff[0]} emoji={successOnOff[1]} runAmin={runAmin}/>
       <Win winOnClick={winOnClick} winHide={screen}/>
       <div className={"list " + listHide }>
         {items.map((item,i) => (
           [
-          <Toggle emoji={item} onOff={switchsState[i]} sendSwitchState={sendSwitchState} switchId={i} showAnim={showAnim} edit={edit} deleteItem = {deleteItem} items = {items}/>,,
-          edit ? <AddToggle /> : <div></div>
+          <Toggle key ={i} emoji={item} onOff={switchsState[i]} sendSwitchState={sendSwitchState} switchId={i} showAnim={showAnim} edit={edit} deleteItem = {deleteItem} items = {items}/>,
+          edit ? <AddToggle key = {i + 'addKey'} addItem={addItem} switchId={i} emoji={item}/> : <div></div>
           ]
         ))}
       </div>

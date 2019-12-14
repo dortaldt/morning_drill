@@ -11,9 +11,11 @@ body {
 }
 
 .list-container {
-  height: 100%;
-  width: 100%;
-  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  /* align-items: center; */
+  /* text-align: center; */
+  position: relative;
   overflow: scroll;
   z-index: 1;
 }
@@ -243,7 +245,7 @@ button {
   margin: 0;
 }
 
-.win button {
+.main-btn {
   margin: auto;
   height: auto;
   width: auto;
@@ -276,7 +278,33 @@ button {
 }
 
 .edit-btn {
-  position: relative;
-  height: auto;
+  position: fixed;
+  right: 24px;
+  top: 24px;
+  z-index: 100;
+  background-color: transparent;
+  box-shadow: none;
+  padding: 16px 32px;
+  color: #0070fa;
+  margin: 24px auto;
+  font-size: 16px;
+}
+
+.example-enter {
+  opacity: 0.01;
+}
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.example-leave {
+  opacity: 1;
+}
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
 }
 
