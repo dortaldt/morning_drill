@@ -277,17 +277,33 @@ button {
   color: white;
 }
 
-.edit-btn {
+.edit-btn-wrapper {
   position: fixed;
-  right: 24px;
-  top: 24px;
+  display: flex;
+  flex-direction: row-reverse;
+  top: 0px;
+  right: 0px;
+  z-index: 100;
+}
+
+.edit-btn {
+  position: relative;
+  width: auto;
   z-index: 100;
   background-color: transparent;
   box-shadow: none;
   padding: 16px 32px;
   color: #0070fa;
-  margin: 24px auto;
+  margin: 24px;
   font-size: 16px;
+  background-color: #ffec71;
+  border-radius: 4px;
+}
+
+.sconed-btn {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
 }
 
 .example-enter {

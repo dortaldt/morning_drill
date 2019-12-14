@@ -62,8 +62,8 @@ function Toggle(props) {
 function AddToggle(props){
   return (
     <div className = 'add-toggle'>
-      <button onClick = {()=>(
-        props.addItem(props.switchId, '🦊')
+      <button className='edit-btn sconed-btn' onClick = {()=>(
+        props.addItem(props.switchId)
       )}>add a task</button>
     </div>
   )
@@ -107,6 +107,7 @@ function List(props) {
   const [size, setSize] = useState('sun-win');
   const [listHide, setListHide] = useState('list-hide');
   const [edit, setEdit] = useState(false);
+  const [editText, setEditText ] = useState('Edit list')
 
   // Setting the background acourding to the switches
   const ons = switchsState.map(x =>(x == 'on'))
@@ -166,11 +167,13 @@ function List(props) {
     if(edit){
       setEdit(false)
       setScreen('win')
+      setEditText('Edit list')
       // setScreen('win')
       setSize('sun-win')
       setListHide('list-hide')
     } else {
       setEdit(true)
+      setEditText('Done')
       setScreen('edit')
       setListHide('show')
       setSize('sun')
@@ -196,9 +199,11 @@ function List(props) {
 
   return (
     <div className='list-container' style ={bgStyle}>
-      {screen==='win' || screen==='edit'? <button className='edit-btn main-btn' onClick = {()=>(
-          toggleEdit()
-        )} >EDIT</button> : null}
+      <div className = 'edit-btn-wrapper'>
+        {screen==='win' || screen==='edit'? <button className='edit-btn main-btn' onClick = {()=>(
+            toggleEdit()
+          )} >{editText}</button> : null}
+      </div>
       <Success class={'success-' + successOnOff[0]} emoji={successOnOff[1]} runAmin={runAmin}/>
       <Win winOnClick={winOnClick} winHide={screen}/>
       <div className={"list " + listHide }>
