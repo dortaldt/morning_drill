@@ -185,6 +185,10 @@ function List(props) {
       setListHide('show')
       setSize('sun')
     }
+    ReactGA.event({
+      category: 'Click',
+      action: 'Edit'
+    });
   }
 
   // On edit mode - adding and item
