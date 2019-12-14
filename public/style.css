@@ -101,6 +101,14 @@ body {
   border-color: #c7b300;
 }
 
+.switch-edit {
+  background: none;
+  border: none;
+  box-shadow: none;
+  width: 100px;
+  
+}
+
 .circle {
   width: 100px;
   height: 100px;
@@ -268,13 +276,12 @@ button {
 }
 
 .remove-item {
-  width: 24px;
   margin-right: 48px;
 }
 
 .material-icons.md-36 {
   font-size: 36px; 
-  color: white;
+  color: #fb4d4d;
 }
 
 .edit-btn-wrapper {
@@ -297,13 +304,22 @@ button {
   margin: 24px;
   font-size: 16px;
   background-color: #ffec71;
-  border-radius: 4px;
 }
 
 .sconed-btn {
   background-color: transparent;
   border: 1px solid white;
   color: white;
+  background-color: transparent;
+  border: 1px dashed white;
+  color: white;
+  height: 100px;
+  width: 100px;
+}
+
+.add-toggle {
+  display: flex;
+  padding-left: 24px;
 }
 
 .example-enter {

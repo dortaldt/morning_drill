@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import ReactGA from 'react-ga';
-import { CSSTransitionGroup } from 'react-transition-group'
-import { CSSTransition } from 'react-transition-group';
+import Cookies from 'universal-cookie';
+
 ReactGA.initialize('UA-38866967-4');
 // import { timeout } from "q";
+
+const cookies = new Cookies();
 
 function Success(props) {
 
@@ -28,10 +30,11 @@ function Toggle(props) {
   return (
     <div>
       <div className="switch-wrapper">
-        <div className={"switch switch-" + props.onOff}>
+        <div className={"switch switch-" + props.onOff + ' ' + (props.screen == 'edit' ? 'switch-edit' : null)}>
           <div className={"circle " + props.onOff}>
             <button
               className={props.onOff + ' noselect'}
+              disabled = {props.screen == 'edit' ?  'disabled' : null}
               onClick={() => {
                 if (props.onOff === "on") {
                   props.sendSwitchState(props.switchId, 'off')
@@ -40,7 +43,6 @@ function Toggle(props) {
                   props.sendSwitchState(props.switchId, 'on')
                   props.showAnim(props.switchId)
                 }
-                {console.log('inside the list items: ' + props.items)}
               }}
             >
               {props.emoji}
@@ -64,7 +66,7 @@ function AddToggle(props){
     <div className = 'add-toggle'>
       <button className='edit-btn sconed-btn' onClick = {()=>(
         props.addItem(props.switchId)
-      )}>add a task</button>
+      )}>Add icon here</button>
     </div>
   )
 }
@@ -113,7 +115,7 @@ function List(props) {
   const ons = switchsState.map(x =>(x == 'on'))
   const background = (ons.filter(Boolean).length/items.length*100).toFixed(1)
   const bgStyle = {
-    'background-image' : 'linear-gradient(135deg, #00adff 0%, #009be4 ' + background +'%)'  
+    'background-image' : 'linear-gradient(135deg, #00adff 0%, #5ac2f3 ' + background +'%)'  
   }
 
   // On switch change
@@ -159,6 +161,9 @@ function List(props) {
     setScreen('game')
     setListHide('show')
     setSize('sun')
+    if(cookies.get('items-cookie') !== undefined) {
+      setItems(cookies.get('items-cookie'))
+    }
     setSwitchState(Array(items.length).fill('off'))
     console.log('switchsState is ' + switchsState)
   }
@@ -168,12 +173,14 @@ function List(props) {
       setEdit(false)
       setScreen('win')
       setEditText('Edit list')
-      // setScreen('win')
       setSize('sun-win')
       setListHide('list-hide')
+      cookies.set('items-cookie', items.slice(), { path: '/' });
+      console.log(cookies.get('items-cookie')); 
+      console.log('the cookie value is ' + items.slice())
     } else {
       setEdit(true)
-      setEditText('Done')
+      setEditText('Save')
       setScreen('edit')
       setListHide('show')
       setSize('sun')
@@ -209,7 +216,7 @@ function List(props) {
       <div className={"list " + listHide }>
         {items.map((item,i) => (
           [
-          <Toggle key ={i} emoji={item} onOff={switchsState[i]} sendSwitchState={sendSwitchState} switchId={i} showAnim={showAnim} edit={edit} deleteItem = {deleteItem} items = {items}/>,
+          <Toggle key ={i} emoji={item} onOff={switchsState[i]} sendSwitchState={sendSwitchState} switchId={i} showAnim={showAnim} edit={edit} deleteItem = {deleteItem} items = {items} screen={screen}/>,
           edit ? <AddToggle key = {i + 'addKey'} addItem={addItem} switchId={i} emoji={item}/> : <div></div>
           ]
         ))}
