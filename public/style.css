@@ -21,7 +21,8 @@ body {
 }
 
 .list {
-    padding-top: 48px;
+    padding-top: 24px;
+    padding-bottom: 24px;
     display: flex;
     flex-direction: column;
     background-repeat: no-repeat;
@@ -31,6 +32,7 @@ body {
     transform: translateX(0);
     position: relative;
     opacity: 1;
+    margin: 0;
 }
 
 .list-hide {
@@ -292,6 +294,7 @@ button {
   top: 0px;
   right: 0px;
   z-index: 100;
+  margin: 24px;
 }
 
 .edit-btn {
@@ -302,9 +305,13 @@ button {
   box-shadow: none;
   padding: 16px 32px;
   color: #0070fa;
-  margin: 24px;
+  margin: 32px 48px;
   font-size: 16px;
   background-color: #ffec71;
+}
+
+.edit-btn.main-btn {
+  margin: 0;
 }
 
 .sconed-btn {
@@ -320,7 +327,7 @@ button {
 
 .add-toggle {
   display: flex;
-  padding-left: 24px;
+  /* padding-left: 24px; */
 }
 
 .example-enter {

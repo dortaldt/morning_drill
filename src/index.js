@@ -63,7 +63,7 @@ function Toggle(props) {
 
 function AddToggle(props){
   return (
-    <div className = 'add-toggle'>
+    <div className = 'switch-wrapper'>
       <button className='edit-btn sconed-btn' onClick = {()=>(
         props.addItem(props.switchId)
       )}>Add icon here</button>
@@ -202,10 +202,18 @@ function List(props) {
     const newItems = items.slice()
     newItems.splice(id +1 , 0, emoji)
     setItems(newItems)
+    ReactGA.event({
+      category: 'Added icon',
+      action: emoji
+    });
   }
 
   // On edit mode - deleting and item
   const deleteItem = (id) => {
+    ReactGA.event({
+      category: 'Remove icon',
+      action: items[id]
+    });
     const newItems = items.slice()
     newItems.splice(id, 1)
     setItems(newItems)
