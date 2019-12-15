@@ -246,6 +246,7 @@ function Footer(props) {
   return (
     <div className = 'footer'>
       <p>Created with ❤️ by <a href='http://www.dordesign.com' target='_blank'>Dor</a></p>
+      <p><a href="mailto:dor@dordesign.com?Subject=Morning%20routine%20feedback" target="_top">Feedback</a></p>
     </div>
   )
 }

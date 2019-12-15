@@ -5,6 +5,11 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 
+p {
+  margin: 0px;
+  line-height: 16px;
+}
+
 .app {
   font-family: sans-serif;
   text-align: center;
@@ -242,7 +247,7 @@ button {
 .win {
   display: flex;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -275,7 +280,10 @@ button {
   position: fixed;
   bottom: 0;
   width: 100%;
-  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  margin: 16px 0;
 }
 
 .remove-item {
