@@ -154,7 +154,7 @@ function List(props) {
     setTimeout(() => {
       setSuccessOnOff(['off',items[i]])
       setRunAnim('')
-    }, 3000);
+    }, 2000);
   }
 
   const winOnClick = () => {
@@ -169,15 +169,19 @@ function List(props) {
   }
 
   const toggleEdit = () => {
+
     if(edit){
       setEdit(false)
       setScreen('win')
       setEditText('Edit list')
       setSize('sun-win')
       setListHide('list-hide')
-      cookies.set('items-cookie', items.slice(), { path: '/' });
-      console.log(cookies.get('items-cookie')); 
-      console.log('the cookie value is ' + items.slice())
+      // Setting cookie
+      const current = new Date();
+      const nextYear = new Date();
+      nextYear.setFullYear(current.getFullYear() + 1);
+      cookies.set('items-cookie', items.slice(), { path: '/', expires: nextYear });
+
     } else {
       setEdit(true)
       setEditText('Save')

@@ -11,7 +11,7 @@ body {
 }
 
 .list-container {
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   /* align-items: center; */
   /* text-align: center; */
@@ -167,6 +167,7 @@ button {
   z-index: 4;
   top: 0;
   flex-direction: column-reverse;
+  pointer-events: none;
 }
 
 .success-on {
@@ -232,7 +233,7 @@ button {
 .run-anim {
   opacity: 0;
   position: relative;
-  transition: transform 6s ease, opacity 2.7s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+  transition: transform 5s ease, opacity 1.7s cubic-bezier(0.95, 0.05, 0.795, 0.035);
   transform: translateY(-90vh);
 }
 
