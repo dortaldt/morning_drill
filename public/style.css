@@ -307,8 +307,7 @@ button {
   top: 0px;
   right: 0px;
   z-index: 100;
-  /* margin: 24px; */
-  padding-top: 24px;
+  padding: 16px 0;
   width: 100%;
   justify-content: space-between;
 }
