@@ -225,7 +225,8 @@ function List(props) {
       <div className = 'edit-btn-wrapper'>
         {screen==='win' || screen==='edit'? <button className='edit-btn main-btn' onClick = {()=>(
             toggleEdit()
-          )} >{editText}</button> : null}
+          )} ><span>{editText}</span></button> : null}
+        {screen === 'win' ? <button onClick={ ()=>{window.location.href = "mailto:dor@dordesign.com?Subject=Morning%20routine%20feedback"}} className='edit-btn main-btn' type="button">Feedback</button> : null} 
       </div>
       <Success class={'success-' + successOnOff[0]} emoji={successOnOff[1]} runAmin={runAmin}/>
       <Win winOnClick={winOnClick} winHide={screen}/>
@@ -246,7 +247,6 @@ function Footer(props) {
   return (
     <div className = 'footer'>
       <p>Created with ❤️ by <a href='http://www.dordesign.com' target='_blank'>Dor</a></p>
-      <p><a href="mailto:dor@dordesign.com?Subject=Morning%20routine%20feedback" target="_top">Feedback</a></p>
     </div>
   )
 }
