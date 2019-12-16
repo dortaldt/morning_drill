@@ -223,10 +223,10 @@ function List(props) {
   return (
     <div className='list-container' style ={bgStyle}>
       <div className = 'edit-btn-wrapper'>
-        {screen==='win' || screen==='edit'? <button className='edit-btn main-btn' onClick = {()=>(
+        {screen==='win' || screen==='edit'? <button className={'edit-btn main-btn ' + (screen==='win' ? 'no-bg-btn' : null)} onClick = {()=>(
             toggleEdit()
-          )} ><span>{editText}</span></button> : null}
-        {screen === 'win' ? <button onClick={ ()=>{window.location.href = "mailto:dor@dordesign.com?Subject=Morning%20routine%20feedback"}} className='edit-btn main-btn' type="button">Feedback</button> : null} 
+          )} >{editText}</button> : null}
+        {screen === 'win' ? <button onClick={ ()=>{window.location.href = "mailto:dor@dordesign.com?Subject=Morning%20routine%20feedback"}} className='edit-btn main-btn no-bg-btn' type="button">Feedback</button> : null} 
       </div>
       <Success class={'success-' + successOnOff[0]} emoji={successOnOff[1]} runAmin={runAmin}/>
       <Win winOnClick={winOnClick} winHide={screen}/>

@@ -31,7 +31,7 @@ p {
 }
 
 .list {
-    padding-top: 24px;
+    padding-top: 48px;
     padding-bottom: 24px;
     display: flex;
     flex-direction: column;
@@ -54,6 +54,7 @@ p {
 
 .sun {
   position: fixed;
+  opacity: 0.9;
   display: flex;
   border-radius: 2000px;
   height: 200px;
@@ -61,13 +62,14 @@ p {
   z-index: 1;
   top: -62px;
   left: -74px;
-  background-color: #ffec71;
-  /* background-image : linear-gradient(135deg, #ffec71 0%, #ffdd00 100%); */
+  /* background-color: #ffec71; */
+  background-image: radial-gradient(#ffec71 0%, #ffb100 100%);
   transition: transform 1s ease;
 }
 
 .sun-win {
   height: 3000px;
+  opacity: 1;
   width: 3000px;
   transform: translate(-1500px, -1500px);
   transition: all 3s ease;
@@ -93,7 +95,7 @@ p {
 }
 
 .switch {
-  box-shadow: inset 0 0 17px 1px #0000002b;
+  box-shadow: inset 1px 1px 17px 1px #0000002b;
   height: 100px;
   z-index: 1;
   border-radius: 100px;
@@ -109,8 +111,8 @@ p {
   border-color: rgb(255, 255, 255);
 }
 .switch-on {
-  background-color: rgb(255, 230, 0);
-  border-color: #c7b300;
+  background-color: #ffec71;
+  border-color: #ffe400;
 }
 
 .switch-edit {
@@ -158,7 +160,7 @@ button {
 
 .on {
   left: calc(100% - 100px);
-  background-color: rgb(255, 230, 0);
+  background-color: #ffd64a;
   transition-property: left background-color;
   transition-duration: 0.3s;
   transition-timing-function: ease;
@@ -310,6 +312,14 @@ button {
   padding: 16px 0;
   width: 100%;
   justify-content: space-between;
+}
+
+.edit-btn-wrapper .edit-btn.main-btn {
+  background: #ffec71;
+}
+
+.edit-btn.main-btn.no-bg-btn {
+  background: none;
 }
 
 .edit-btn {
