@@ -183,6 +183,10 @@ function List(props) {
       cookies.set('items-cookie', items.slice(), { path: '/', expires: nextYear });
 
     } else {
+      if(cookies.get('items-cookie') !== undefined) {
+        setItems(cookies.get('items-cookie'))
+      }
+      setSwitchState(Array(items.length).fill('off'))
       setEdit(true)
       setEditText('Save')
       setScreen('edit')
